@@ -1,117 +1,279 @@
-# Northbound — Focus & Project Dashboard
+# 🚀**NorthBound-SaaS-Project-Management-Dashboard-**
 
-A responsive analytics/admin dashboard built with **semantic HTML5**, **modern CSS (Grid + Flexbox)**, and **vanilla JavaScript** — no frameworks, no build step.
+A modern and responsive 
+**NorthBound-SaaS-Project-Management-Dashboard-** built using **HTML, CSS, JavaScript, and Supabase**. The application enables teams to manage projects efficiently through secure authentication, role-based access control, project tracking, analytics, and an intuitive user interface.
 
-**[Live demo →](#)** *(add your deployed link here once published)*
+---
 
-![Northbound dashboard preview](preview.png)
+## 📌 Project Overview
 
-## Why this project
+This project simulates a real-world project management system where users can securely log in, manage projects, track activities, monitor goals, and visualize project statistics through an interactive dashboard.
 
-Most beginner portfolios ship a landing page. This is a **dashboard UI** instead, because dashboards force the layout problems real front-end work actually involves: a fixed sidebar, a responsive data table, cards, a mini chart, and information hierarchy — not just a hero and a footer.
+The application supports **Admin** and **User** roles, ensuring that each user has access only to the modules they are authorized to view.
 
-## Features
+---
 
-- Fully responsive layout — collapsible sidebar on mobile, stacked table on small screens
-- Live search/filter on the projects table (vanilla JS, no dependencies)
-- Custom SVG radial progress indicator ("compass") animated on load
-- Pure CSS bar chart for weekly focus hours (no chart library)
-- Accessible by default: semantic landmarks, visible focus states, `aria-label`s on non-text visuals, `prefers-reduced-motion` respected
-- Design token system in CSS custom properties for consistent color/type/spacing
+## ✨ Features
 
-## Tech stack
+### 🔐 Authentication
+- Secure Login & Logout
+- Supabase Authentication
+- Session Management
+- Protected Dashboard Access
 
-| Layer | Choice |
-|---|---|
-| Markup | Semantic HTML5 (`<nav>`, `<main>`, `<table>`, `<time>`) |
-| Styling | CSS3 — Grid, Flexbox, custom properties, no preprocessor |
-| Interactivity | Vanilla JavaScript (ES6) |
-| Fonts | Fraunces (display), Inter (body), JetBrains Mono (data) via Google Fonts |
+### 👤 Role-Based Access Control
+- Admin Dashboard
+- User Dashboard
+- Restricted Modules
+- Dynamic Navigation
 
-## Project structure
+### 📊 Dashboard
+- Project Overview
+- Statistics Cards
+- Progress Tracking
+- Project Analytics
+
+### 📁 Project Management
+- Create Projects
+- Edit Projects
+- Delete Projects
+- Project Categories
+- Project Status Tracking
+- Deadline Management
+
+### 🔍 Global Search
+- Search Projects
+- Search Activities
+- Search Goals
+- Dynamic Filtering
+
+### 📅 Activity Tracking
+- Recent Activities
+- Timeline View
+- User Actions
+
+### 🎯 Goals Management
+- Create Goals
+- Track Progress
+- Goal Status
+
+### ⚙️ Settings
+- User Profile
+- Account Information
+- Role Management
+
+### 📱 Responsive Design
+- Desktop Support
+- Tablet Support
+- Mobile Friendly
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+- HTML5
+- CSS3
+- JavaScript (ES6)
+
+## Backend
+- Supabase
+
+## Database
+- PostgreSQL
+
+## Authentication
+- Supabase Authentication
+
+## Version Control
+- Git
+- GitHub
+
+---
+
+# 📂 Folder Structure
 
 ```
-dashboard-project/
-├── index.html          # Page structure, login screen + dashboard
-├── style.css            # Design tokens + all styling
-├── script.js             # Supabase Auth + Database, sidebar, search, ring animation
-├── supabase-config.js     # Your Supabase project URL + anon key go here
-├── supabase-setup.sql      # Run once in Supabase's SQL Editor: tables + security policies
-└── README.md
+Project-Management-Dashboard/
+│
+├── images/
+├── css/
+│   └── style.css
+│
+├── js/
+│   ├── script.js
+│   └── supabase-config.js
+│
+├── index.html
+├── README.md
+└── supabase-setup.sql
 ```
 
-## Backend: Supabase (no Java/Python required, no card required)
+---
 
-This project uses **Supabase** as a Backend-as-a-Service — a real Postgres database
-plus real authentication, called directly from `script.js`. There is no server code to
-write or host, and the free tier never asks for a credit card.
+# 📸 Screenshots
 
-### 1. Create a Supabase project
-1. Go to [supabase.com](https://supabase.com) → sign in (GitHub login is easiest) → **New project**
-2. Give it a name (e.g. `northbound-dashboard`), set a database password($hxL&rv@D%rK7WS), pick a region → **Create**
-3. Once it's ready: **Project Settings (gear icon) → API**
-4. Copy the **Project URL**(https://ptaatcyxoczfykkxmoyk.supabase.co) and the **anon public** key into **`supabase-config.js`**
+## Login Page
+<img width="530" height="351" alt="image" src="https://github.com/user-attachments/assets/101bc433-4a8a-49bd-b879-1e2404c22391" />
 
-### 2. Set up the database and tables
-1. In the left sidebar: **SQL Editor → New query**
-2. Open **`supabase-setup.sql`** from this project, copy its contents, paste them in, click **Run**
-3. This creates a `profiles` table (stores each user's role) and a `projects` table
-   (your dashboard data), with Row Level Security policies already applied, plus a
-   few sample projects to start with
 
-### 3. Turn on Authentication and create your admin login
-1. **Authentication → Users → Add user**
-2. Enter your email + password → **Create user**
-3. Copy the **User UID** it generates
+---
 
-### 4. Grant yourself the admin role
-1. **Table Editor → profiles → Insert → Insert row**
-2. `id`: paste the User UID from step 3
-3. `name`: your name
-4. `role`: `admin`
-5. **Save**
+## Dashboard
 
-This `profiles` table with Row Level Security is what actually enforces "admin only" —
-not the JavaScript. Client-side code can always be edited in a browser's dev tools, so
-real authorization has to be checked on Supabase's servers via these policies, not just
-hidden in the UI.
+<img width="959" height="413" alt="image" src="https://github.com/user-attachments/assets/3567d130-e270-4721-b913-f6ee32750434" />
 
-### 5. Run it
-Open `index.html` (or serve it locally, see below) and sign in with the email/password
-you created in step 3. Only accounts with a matching `profiles` row where `role = 'admin'`
-will get past the login screen.
 
-## Running locally
+---
 
-No build tools required — it's static HTML/CSS/JS.
+## Projects Module
+
+<img width="959" height="415" alt="image" src="https://github.com/user-attachments/assets/1bba1aab-27d5-4c60-979d-296a078e1273" />
+
+---
+
+## Goals Module
+
+<img width="959" height="409" alt="image" src="https://github.com/user-attachments/assets/16ca579f-007d-450d-9c40-64c679f503cb" />
+
+
+---
+
+## Activity Module
+
+<img width="957" height="415" alt="image" src="https://github.com/user-attachments/assets/18cb344e-8e90-4519-8f04-c51bcd804091" />
+
+---
+
+## Settings
+
+<img width="957" height="415" alt="image" src="https://github.com/user-attachments/assets/54a5889f-fab4-4933-a0ff-63bed98a4e9d" />
+
+
+---
+
+# 🚀 Installation
+
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/northbound-dashboard.git
-cd northbound-dashboard
-# then just open index.html in a browser, or serve it locally:
-python3 -m http.server 8000
-# visit http://localhost:8000
+git clone https://github.com/YOUR_GITHUB_USERNAME/Project-Management-Dashboard.git
 ```
 
-## Deploying (free, in under 2 minutes)
+### 2. Navigate to the project folder
 
-**Option A — GitHub Pages**
-1. Push this repo to GitHub
-2. Go to **Settings → Pages**
-3. Under "Source," select the `main` branch and `/root`
-4. Your live link will appear at `https://<username>.github.io/<repo-name>/`
+```bash
+cd Project-Management-Dashboard
+```
 
-**Option B — Netlify / Vercel**
-1. Import the GitHub repo on netlify.com or vercel.com
-2. No build command needed (static site) — deploy as-is
+### 3. Create a Supabase project
 
-## What I'd improve next
+- Sign in to https://supabase.com
+- Create a new project.
+- Copy your **Project URL** and **Anon Public Key**.
 
-- Wire the "+ New project" button to an actual modal/form
-- Persist search state and sidebar collapse state
-- Add a dark mode toggle using the existing CSS custom properties
-- Replace mock data with a small JSON file fetched on load
+### 4. Configure Supabase
 
-## License
+Open:
 
-MIT — feel free to fork and customize.
+```text
+supabase-config.js
+```
+
+Replace the placeholder values with your own:
+
+```javascript
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+```
+
+### 5. Create the database
+
+Open the **Supabase SQL Editor** and execute:
+
+```text
+supabase-setup.sql
+```
+
+This will create all required tables and sample data.
+
+### 6. Run the application
+
+Open the project using **VS Code**.
+
+Install the **Live Server** extension (if not already installed).
+
+Right-click on `index.html` and select:
+
+```
+Open with Live Server
+```
+
+The application will be available in your browser.
+
+
+# Future Enhancements
+
+- Email Notifications
+- Dark Mode
+- Team Collaboration
+- File Upload Support
+- Comments System
+- Project Attachments
+- Calendar Integration
+- Kanban Board
+- Report Generation
+- Export to PDF & Excel
+
+---
+
+# Learning Outcomes
+
+This project helped me strengthen my understanding of:
+
+- JavaScript ES6
+- DOM Manipulation
+- CRUD Operations
+- Authentication
+- Role-Based Access Control
+- Database Integration
+- Supabase
+- Responsive UI Design
+- Session Management
+- Git & GitHub Workflow
+
+---
+
+# Live Demo
+
+🔗 https://your-live-demo-link.com
+
+---
+
+# GitHub Repository
+
+🔗 https://github.com/YOUR_USERNAME/Project-Management-Dashboard
+
+---
+
+# Author
+
+## Anusha Yepuri
+
+Java Full Stack Developer
+
+LinkedIn:
+https://www.linkedin.com/in/anushayepuri/
+GitHub:
+https://github.com/AnushaYepuri
+---
+
+## ⭐ Support
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
