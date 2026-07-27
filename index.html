@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northbound — Focus Dashboard</title>
+<meta name="description" content="A focus and project tracking dashboard built with semantic HTML5 and modern CSS (Grid/Flexbox).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Auth gate: shown until Firebase confirms a signed-in, authorized user -->
+  <div class="auth-overlay" id="authOverlay">
+    <form class="auth-card" id="loginForm">
+      <div class="brand brand--auth">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span class="brand-name">Northbound</span>
+      </div>
+      <h1 class="auth-title">Sign in to your dashboard</h1>
+      <p class="auth-sub">Admin access only.</p>
+
+      <label class="field">
+        <span>Email</span>
+        <input type="email" id="loginEmail" autocomplete="username" required>
+      </label>
+
+      <label class="field">
+        <span>Password</span>
+        <input type="password" id="loginPassword" autocomplete="current-password" required>
+      </label>
+
+      <p class="auth-error" id="authError" role="alert" aria-live="polite"></p>
+
+      <button type="submit" class="btn btn-primary btn-auth" id="loginBtn">Sign in</button>
+    </form>
+  </div>
+
+  <div class="app" id="appRoot" hidden>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span class="brand-name">Northbound</span>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#overview" class="nav-link is-active" data-view="overview">
+          <span class="nav-icon" aria-hidden="true">&#9679;</span> Overview
+        </a>
+        <a href="#projects" class="nav-link" data-view="projects">
+          <span class="nav-icon" aria-hidden="true">&#9635;</span> Projects
+        </a>
+        <a href="#activity" class="nav-link" data-view="activity">
+          <span class="nav-icon" aria-hidden="true">&#9670;</span> Activity
+        </a>
+        <a href="#goals" class="nav-link" data-view="goals">
+          <span class="nav-icon" aria-hidden="true">&#9733;</span> Goals
+        </a>
+        <a href="#settings" class="nav-link" data-view="settings">
+          <span class="nav-icon" aria-hidden="true">&#9881;</span> Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="userAvatar">—</div>
+          <div>
+            <p class="user-name" id="userName">Signed in</p>
+            <p class="user-role" id="userRole">Admin</p>
+          </div>
+        </div>
+        <button class="logout-btn" id="logoutBtn" type="button">Sign out</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main-wrap">
+
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar" aria-expanded="true">
+          <span></span><span></span><span></span>
+        </button>
+
+        <header class="topbar">
+
+    <button class="menu-toggle" id="menuToggle">
+        <span></span><span></span><span></span>
+    </button>
+
+    <div class="search-box">
+
+        <input
+            type="search"
+            id="tableSearch"
+            placeholder="Search by project, month, deadline, manager...">
+
+        <div id="searchResults" class="search-results"></div>
+
+    </div>
+
+    <button
+        class="btn btn-primary"
+        id="newProjectBtn">
+
+        + New Project
+
+    </button>
+
+</header>
+      </header>
+
+      <main class="content">
+
+        <!-- ============ OVERVIEW ============ -->
+        <section class="view is-active" data-view="overview">
+
+          <section class="hero" aria-labelledby="heroHeading">
+            <div class="hero-text">
+              <p class="eyebrow">Overview</p>
+              <h1 id="heroHeading">Good morning, <span id="heroName">there</span>.<br>Here's where things stand.</h1>
+              <p class="hero-sub" id="heroSub">Loading your project summary…</p>
+            </div>
+
+            <div class="compass" role="img" aria-label="72 percent of weekly focus goal complete">
+              <svg viewBox="0 0 160 160" class="compass-svg">
+                <circle cx="80" cy="80" r="68" class="compass-track"></circle>
+                <circle cx="80" cy="80" r="68" class="compass-progress" pathLength="100" style="stroke-dasharray: 72 100;"></circle>
+                <g class="compass-ticks">
+                  <line x1="80" y1="8" x2="80" y2="18"></line>
+                  <line x1="152" y1="80" x2="142" y2="80"></line>
+                  <line x1="80" y1="152" x2="80" y2="142"></line>
+                  <line x1="8" y1="80" x2="18" y2="80"></line>
+                </g>
+              </svg>
+              <div class="compass-label">
+                <span class="compass-value">72%</span>
+                <span class="compass-caption">focus goal</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="stats" aria-label="Key metrics">
+            <article class="stat-card">
+              <p class="stat-label">Total projects</p>
+              <p class="stat-value" id="statTotalProjects">—</p>
+            </article>
+            <article class="stat-card">
+              <p class="stat-label">Avg. progress</p>
+              <p class="stat-value" id="statAvgProgress">—</p>
+            </article>
+            <article class="stat-card">
+              <p class="stat-label">At risk</p>
+              <p class="stat-value" id="statAtRisk">—</p>
+            </article>
+          </section>
+
+          <div class="grid-two">
+            <section class="panel" aria-labelledby="donutHeading">
+              <div class="panel-head">
+                <h2 id="donutHeading">Projects by status</h2>
+              </div>
+              <div class="donut-wrap" id="donutWrap">
+                <div class="donut" id="statusDonut"></div>
+                <ul class="donut-legend" id="donutLegend"></ul>
+              </div>
+            </section>
+
+            <section class="panel" aria-labelledby="recentHeading">
+              <div class="panel-head">
+                <h2 id="recentHeading">Recent activity</h2>
+              </div>
+              <ul class="feed" id="overviewFeed">
+                <li><span class="feed-dot" aria-hidden="true"></span><div><p>Loading…</p></div></li>
+              </ul>
+            </section>
+          </div>
+        </section>
+
+        <!-- ============ PROJECTS ============ -->
+        <section class="view" data-view="projects" hidden>
+          <section class="panel" aria-labelledby="projectsHeading">
+            <div class="panel-head">
+              <h2 id="projectsHeading">All projects</h2>
+              <span class="panel-count" id="rowCount">— active</span>
+            </div>
+
+            <table class="table" id="projectTable">
+              <thead>
+                <tr>
+                  <th scope="col">Project</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Progress</th>
+                </tr>
+              </thead>
+              <tbody id="projectRows">
+                <tr class="loading-row">
+                  <td colspan="4">Loading projects…</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- ============ ACTIVITY ============ -->
+        <section class="view" data-view="activity" hidden>
+          <div class="grid-two">
+            <section class="panel" aria-labelledby="focusHeading">
+              <div class="panel-head">
+                <h2 id="focusHeading">This week's focus</h2>
+              </div>
+              <div class="chart" role="img" aria-label="Focus hours by day">
+                <div class="chart-bar"><span style="--val: 58%"></span><label>Mon</label></div>
+                <div class="chart-bar"><span style="--val: 98%"></span><label>Tue</label></div>
+                <div class="chart-bar"><span style="--val: 51%"></span><label>Wed</label></div>
+                <div class="chart-bar"><span style="--val: 75%"></span><label>Thu</label></div>
+                <div class="chart-bar"><span style="--val: 65%"></span><label>Fri</label></div>
+                <div class="chart-bar"><span style="--val: 18%"></span><label>Sat</label></div>
+                <div class="chart-bar"><span style="--val: 9%"></span><label>Sun</label></div>
+              </div>
+              <ul class="feed" id="activityFeed"></ul>
+            </section>
+
+            <section class="panel" aria-labelledby="timelineHeading">
+              <div class="panel-head">
+                <h2 id="timelineHeading">Project timelines</h2>
+              </div>
+              <ul class="timeline-list" id="timelineList">
+                <li>Loading…</li>
+              </ul>
+            </section>
+          </div>
+        </section>
+
+        <!-- ============ GOALS ============ -->
+      <section class="view" data-view="goals" hidden>
+  <div class="goals-dashboard">
+
+    <!-- Top Stats -->
+    <div class="goal-summary">
+
+      <div class="goal-card">
+        <h3>Overall Progress</h3>
+        <div class="circle">
+          <span>52%</span>
+        </div>
+        <p>Target: 50% in next 15 days</p>
+      </div>
+
+      <div class="goal-card">
+        <h3>Projects</h3>
+        <h1>4</h1>
+        <p>Active Projects</p>
+      </div>
+
+      <div class="goal-card">
+        <h3>Deadlines</h3>
+        <h1>15</h1>
+        <p>Days Remaining</p>
+      </div>
+
+      <div class="goal-card">
+        <h3>Status</h3>
+        <h1 style="color:#16a34a;">On Track</h1>
+        <p>Keep Going!</p>
+      </div>
+
+    </div>
+
+    <!-- Goals -->
+    <section class="panel">
+
+      <div class="panel-head">
+        <h2>Project Goals</h2>
+      </div>
+
+      <div class="goal-item">
+
+        <div class="goal-title">
+          <strong>Banking Mobile Application</strong>
+          <span>45%</span>
+        </div>
+
+        <div class="progress">
+          <div style="width:45%;"></div>
+        </div>
+
+        <small>Goal : Reach 50% within next 15 days</small>
+
+      </div>
+
+      <div class="goal-item">
+
+        <div class="goal-title">
+          <strong>E-Commerce Inventory</strong>
+          <span>72%</span>
+        </div>
+
+        <div class="progress">
+          <div style="width:72%;"></div>
+        </div>
+
+        <small>Goal : Complete before deadline</small>
+
+      </div>
+
+      <div class="goal-item">
+
+        <div class="goal-title">
+          <strong>Smart City Traffic</strong>
+          <span>30%</span>
+        </div>
+
+        <div class="progress">
+          <div style="width:30%; background:#f59e0b;"></div>
+        </div>
+
+        <small>Goal : Reach 50% by next review</small>
+
+      </div>
+
+      <div class="goal-item">
+
+        <div class="goal-title">
+          <strong>Healthcare Appointment</strong>
+          <span>82%</span>
+        </div>
+
+        <div class="progress">
+          <div style="width:82%;"></div>
+        </div>
+
+        <small>Goal : Finish remaining modules</small>
+
+      </div>
+
+    </section>
+
+    <!-- Milestones -->
+
+    <section class="panel">
+
+      <div class="panel-head">
+        <h2>Upcoming Milestones</h2>
+      </div>
+
+      <ul class="milestones">
+
+        <li>✅ Complete Backend APIs</li>
+        <li>🧪 Finish Testing Phase</li>
+        <li>🎨 UI Review</li>
+        <li>🚀 Deploy to Staging</li>
+        <li>🏁 Final Client Review</li>
+
+      </ul>
+
+    </section>
+
+  </div>
+</section>
+
+        <!-- ============ SETTINGS ============ -->
+        <section class="view" data-view="settings" hidden>
+
+    <section class="panel settings-panel">
+
+        <div class="panel-head">
+            <h2>Project Management</h2>
+            <button class="save-btn" id="saveProjectBtn">
+                💾 Save Changes
+            </button>
+        </div>
+
+        <div class="settings-grid">
+
+            <!-- Project -->
+
+            <div class="setting-group">
+
+                <label>Project</label>
+
+                <select id="projectSelect">
+
+                    <option>Banking Mobile Application</option>
+                    <option>E-Commerce Inventory Management</option>
+                    <option>Smart City Traffic Monitoring</option>
+                    <option>Healthcare Appointment System</option>
+
+                </select>
+
+            </div>
+
+            <!-- Deadline -->
+
+            <div class="setting-group">
+
+                <label>Project Deadline</label>
+
+                <input
+                    type="date"
+                    id="deadlineInput">
+
+            </div>
+
+            <!-- Progress -->
+
+            <div class="setting-group">
+
+                <label>Completion (%)</label>
+
+                <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    id="progressInput">
+
+            </div>
+
+            <!-- Status -->
+
+            <div class="setting-group">
+
+                <label>Status</label>
+
+                <select id="statusInput">
+
+                    <option>Not Started</option>
+
+                    <option selected>In Progress</option>
+
+                    <option>Completed</option>
+
+                    <option>Blocked</option>
+
+                </select>
+
+            </div>
+
+            <!-- Priority -->
+
+            <div class="setting-group">
+
+                <label>Priority</label>
+
+                <select id="priorityInput">
+
+                    <option>Low</option>
+
+                    <option selected>Medium</option>
+
+                    <option>High</option>
+
+                    <option>Critical</option>
+
+                </select>
+
+            </div>
+
+            <!-- Project Manager -->
+
+            <div class="setting-group">
+
+                <label>Project Manager</label>
+
+                <input
+                    type="text"
+                    id="managerInput"
+                    value="Anusha Yepuri">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Deadline Review -->
+
+    <section class="panel">
+
+        <div class="panel-head">
+
+            <h2>Deadline Review</h2>
+
+        </div>
+
+        <div class="review-card">
+
+            <div>
+
+                <h3>Current Deadline</h3>
+
+                <p id="currentDeadline">
+                    22 Aug 2026
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>New Deadline</h3>
+
+                <p id="newDeadline">
+                    15 Aug 2026
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>Reason</h3>
+
+                <textarea
+                    id="deadlineReason"
+                    rows="4"
+                    placeholder="Reason for changing the deadline..."></textarea>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ============ NEW PROJECT MODAL ============ -->
+  <div class="modal-overlay" id="newProjectOverlay" hidden>
+    <form class="modal-card" id="newProjectForm">
+      <h2>New project</h2>
+
+      <label class="field">
+        <span>Project name</span>
+        <input type="text" id="npName" required>
+      </label>
+
+      <label class="field">
+        <span>Owner</span>
+        <input type="text" id="npOwner">
+      </label>
+
+      <label class="field">
+        <span>Category</span>
+        <input type="text" id="npCategory">
+      </label>
+
+      <label class="field">
+        <span>Status</span>
+        <select id="npStatus">
+          <option value="track">On track</option>
+          <option value="ahead">Ahead</option>
+          <option value="risk">At risk</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Progress (%)</span>
+        <input type="number" id="npProgress" min="0" max="100" value="0">
+      </label>
+
+      <label class="field">
+        <span>Deadline</span>
+        <input type="date" id="npDeadline">
+      </label>
+
+      <p class="auth-error" id="npError" role="alert"></p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" id="npCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="npSave">Create project</button>
+      </div>
+    </form>
+  </div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
