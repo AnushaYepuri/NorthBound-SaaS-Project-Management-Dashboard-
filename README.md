@@ -1,5 +1,4 @@
-# 🚀
-**NorthBound-SaaS-Project-Management-Dashboard-**
+# 🚀**NorthBound-SaaS-Project-Management-Dashboard-**
 
 A modern and responsive 
 **NorthBound-SaaS-Project-Management-Dashboard-** built using **HTML, CSS, JavaScript, and Supabase**. The application enables teams to manage projects efficiently through secure authentication, role-based access control, project tracking, analytics, and an intuitive user interface.
