@@ -261,12 +261,9 @@ https://github.com/AnushaYepuri/NorthBound-SaaS-Project-Management-Dashboard-
 
 Java Full Stack Developer
 
-LinkedIn:
-https://www.linkedin.com/in/anushayepuri/
-GitHub:
-https://github.com/AnushaYepuri
-Portfolio:
-https://anushayepuri.github.io/anusha-s_portfolio/
+**LinkedIn: https://www.linkedin.com/in/anushayepuri/
+GitHub: https://github.com/AnushaYepuri
+Portfolio: https://anushayepuri.github.io/anusha-s_portfolio/**
 ---
 
 ## ⭐ Support
