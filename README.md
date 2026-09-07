@@ -246,6 +246,9 @@ This project helped me strengthen my understanding of:
 
 # Live Demo
 
+**Admin password: Northbound2026!
+Admin email: admin@northbound.com**
+
 🔗 https://startling-travesseiro-14aab8.netlify.app/
 
 ---
