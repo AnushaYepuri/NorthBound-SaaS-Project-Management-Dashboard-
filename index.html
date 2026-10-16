@@ -13,7 +13,7 @@
 <body>
 
   <!-- Auth gate: shown until Firebase confirms a signed-in, authorized user -->
-  <div class="auth-overlay" id="authOverlay">
+  <div class="auth-overlay" id="authOverlay" hidden>
     <form class="auth-card" id="loginForm">
       <div class="brand brand--auth">
         <span class="brand-mark" aria-hidden="true">N</span>
@@ -31,14 +31,21 @@
         <span>Password</span>
         <input type="password" id="loginPassword" autocomplete="current-password" required>
       </label>
-
+<div class="demo-box">
+  <p class="demo-title">Demo admin login</p>
+  <p>Email: <strong>admin@example.com</strong><br>Password: <strong>YourNewPassword123</strong></p>
+  <button type="button" class="btn"
+    onclick="document.getElementById('loginEmail').value='admin@example.com';document.getElementById('loginPassword').value='YourNewPassword123';">
+    Fill demo login
+  </button>
+</div>
       <p class="auth-error" id="authError" role="alert" aria-live="polite"></p>
 
       <button type="submit" class="btn btn-primary btn-auth" id="loginBtn">Sign in</button>
     </form>
   </div>
 
-  <div class="app" id="appRoot" hidden>
+  <div class="app" id="appRoot"  >
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">

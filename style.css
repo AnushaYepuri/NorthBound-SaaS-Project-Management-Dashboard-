@@ -1225,3 +1225,6 @@ grid-template-columns:1fr;
   gap: 10px;
   margin-top: 8px;
 }
+.demo-box { background:#eef4ff; border:1px dashed #6b8cce; border-radius:8px; padding:12px; margin:12px 0; font-size:14px; }
+.demo-title { font-weight:600; margin:0 0 6px; }
+.demo-box .btn { margin-top:8px; }
