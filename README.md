@@ -255,7 +255,7 @@ Admin email: admin@northbound.com**
 
 # GitHub Repository
 
-https://github.com/AnushaYepuri/NorthBound-SaaS-Project-Management-Dashboard-
+https://github.com/AnushaYepuri/NorthBound-SaaS-Project-Management-Dashboard
 ---
 
 # Author
@@ -268,7 +268,7 @@ Java Full Stack Developer
 
 GitHub: https://github.com/AnushaYepuri                 
 
-Portfolio: https://anushayepuri.github.io/anusha-s_portfolio/**
+Portfolio: https://anushayepuri.github.io/anusha-s_portfolio
 ---
 
 ## ⭐ Support
