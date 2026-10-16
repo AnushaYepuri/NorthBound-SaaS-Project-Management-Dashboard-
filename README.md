@@ -157,7 +157,7 @@ Project-Management-Dashboard/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/Project-Management-Dashboard.git
+https://github.com/AnushaYepuri/NorthBound-SaaS-Project-Management-Dashboard-
 ```
 
 ### 2. Navigate to the project folder
@@ -246,14 +246,16 @@ This project helped me strengthen my understanding of:
 
 # Live Demo
 
-🔗 https://your-live-demo-link.com
+**Admin password: Northbound2026!
+Admin email: admin@northbound.com**
+
+🔗 https://startling-travesseiro-14aab8.netlify.app/
 
 ---
 
 # GitHub Repository
 
-🔗 https://github.com/YOUR_USERNAME/Project-Management-Dashboard
-
+https://github.com/AnushaYepuri/NorthBound-SaaS-Project-Management-Dashboard
 ---
 
 # Author
@@ -262,10 +264,11 @@ This project helped me strengthen my understanding of:
 
 Java Full Stack Developer
 
-LinkedIn:
-https://www.linkedin.com/in/anushayepuri/
-GitHub:
-https://github.com/AnushaYepuri
+**LinkedIn: https://www.linkedin.com/in/anushayepuri/               
+
+GitHub: https://github.com/AnushaYepuri                 
+
+Portfolio: https://anushayepuri.github.io/anusha-s_portfolio
 ---
 
 ## ⭐ Support
